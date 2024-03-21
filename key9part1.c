@@ -94,3 +94,70 @@ void output (int *buffer, int length) {
 		printf("%d ", buffer[i]);
     }
 }
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int input(int *size, int *data);
+void swap(int *arr, int i, int j);
+void bubbleSort(int *arr, int n);
+void output(int *arr, int n);
+
+int main() {
+    int n;
+    int *data = NULL;
+
+    char ch;
+    if (scanf("%d%c", &n, &ch) != 2 || ch != '\n') {
+        printf("n/a");
+        return 1;
+    }
+    
+    data = (int*) malloc(n * sizeof(int));
+    if (input(&n, data) == 1) {
+        printf("n/a");
+        return 1;
+    }
+    bubbleSort(data, n);
+    output(data, n);
+    free(data);
+    
+    return 0;
+}
+
+int input(int *size, int *data) {
+    //char ch;
+    int flag = 0;
+
+    for (int i = 0; i < *size; i ++) {
+        scanf("%d", &data[i]);
+    }
+
+
+    return flag;
+}
+
+void swap(int *arr, int i, int j) {
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+void bubbleSort(int *arr, int n) {
+    int i, j;
+    for (i = 0; i < n - 1; i++)
+        for (j = 0; j < n - i - 1; j++)
+            if (arr[j] > arr[j + 1]) swap(arr, j, j + 1);
+}
+
+void output(int *arr, int n) {
+    for (int i = 0; i < n; i++) {
+        if (i == n - 1) {
+            printf("%d", arr[i]);
+        } else {
+            printf("%d ", arr[i]);
+        }
+    }
+}
+
